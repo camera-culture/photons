@@ -1,3 +1,1 @@
-# Website for the MIT Media Lab Extreme Sensors Workshop
-
-Forked from https://github.com/tobinsouth/mit-web3-desoc-website
+# Website for the MIT Media Lab Extreme Sensing with Single Photons
