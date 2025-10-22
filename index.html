@@ -14,7 +14,7 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -42,16 +42,18 @@
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">Extreme Sensing with Single Photons</a></h1>
+      <h1 class="logo">
+                <img src="./assets/img/photons.png" alt="CC Logo" style="height: 2em; vertical-align: middle; margin-right: 0.3em; margin-bottom: 0.1em">
+                <a href="index.html">Extreme Sensing with Single Photons</a>
+      </h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">Abstract</a></li>
-          <li><a class="nav-link scrollto" href="#team">Speakers</a></li>
-          <li><a class="nav-link scrollto " href="#why-us">Schedule</a></li>
+          <li><a class="nav-link scrollto" href="#team">Members</a></li>
+          <li><a class="nav-link scrollto" href="#research">Research</a></li> 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -62,52 +64,28 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
-      <h1> Extreme Sensing with Single Photons
-      </h1>
+      <h1>Extreme Sensing with Single Photons</h1>
       <h2>
-        Research projects at the MIT Media Lab Camera Culture Group</br>
+        <img src="./assets/img/cc_logo.png" alt="CC Logo" style="height: 1.4em; vertical-align: middle; margin-right: 0.3em; margin-bottom: 0.1em">
+        MIT Media Lab Camera Culture Group
       </h2>
-      </br>
-      </br>
+      <br>
+      <br>
     </div>
+  </section>
+
 
   </section><!-- End Hero -->
 
-
-
-
-
-
-
   <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
-
-            <p>
-              Building AI systems that learn from multiple sensory inputs such as text, speech, video, real-world sensors, wearable devices, and medical data holds great promise for impact in many scientific areas with practical benefits, such as in supporting human health and well-being, enabling multimedia content processing, and enhancing real-world autonomous agents. This workshop will cover practical methods for designing and deploying AI systems that can sense, learn, and interact with the real world through many sensory modalities. It will cover a spectrum of methods, from lightweight, efficient sensing tools to modern large-scale multimodal foundation models. The workshop will also explore the applications of next-generation AI for extreme sensing, revealing hidden visual information beyond human perception, such as seeing around corners and turning objects into cameras.            </p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-
 
     <!-- ======= Team Section ======= -->
     <section id="team" class="team">
       <div class="container">
 
         <div class="section-title">
-          <span>Faculty</span>
-          <h2>Faculty</h2>
+          <!-- <span>Faculty</span> -->
+          <h2>Faculty and Students</h2>
         </div>
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
@@ -124,13 +102,10 @@
         
            </div>
         </div>
-        
-
         </div>
 
       </div>
     </section><!-- End Team Section -->
-
 
 
 
@@ -140,25 +115,13 @@
       <div class="container">
 
         <div class="section-title">
-          <span>Students</span>
-          <h2>Students</h2>
+          <!-- <span>Students</span> -->
+          <!-- <h2>Students</h2> -->
         </div>
 
         <div class="row">
           
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
-            <div class="member">
-              <img src="assets/img/team/sid.jpg" alt="">
-              <h4>Siddharth Somasundaram</h4>
-              <span>Camera Culture</span>
-              <p>Graduate Student at MIT Media Lab</p>
-              <div class="social">
-                <a href="https://sidsoma.github.io" target="_blank"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
             <div class="member">
               <img src="assets/img/team/nikhil.jpeg" alt="">
               <h4>Nikhil Behari</h4>
@@ -170,7 +133,31 @@
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+            <div class="member">
+              <img src="assets/img/team/aaron.jpg" alt="">
+              <h4>Aaron Young</h4>
+              <span>Camera Culture</span>
+              <p>Graduate Student at MIT Media Lab</p>
+              <div class="social">
+                <a href="https://aaronyoung5.github.io" target="_blank"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+            <div class="member">
+              <img src="assets/img/team/sid.jpg" alt="">
+              <h4>Siddharth Somasundaram</h4>
+              <span>Camera Culture</span>
+              <p>Graduate Student at MIT Media Lab</p>
+              <div class="social">
+                <a href="https://sidsoma.github.io" target="_blank"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
             <div class="member">
               <img src="assets/img/team/tzofi.jpg" alt="">
               <h4>Tzofi Klinghoffer</h4>
@@ -185,8 +172,6 @@
 
         </div>
         
-    
-
         </div>
 
       </div>
@@ -196,100 +181,71 @@
     </section><!-- End Team Section -->
 
 
-
-
-<!-- ======= Why Us Section ======= -->
-<section id="why-us" class="why-us">
+<!-- ======= Research Section ======= -->
+<section id="research" class="team">
   <div class="container">
-
     <div class="section-title">
-      <h2>Multimodal AI for Extreme Sensing</h2>
-      <h4>October 23, 2025 (9:30 AM - 11:00 AM and 11:30 AM - 1:00 PM)</h4>
-      <h4>MIT Media Lab E14-240</h4>
+      <h2>Research</h2>
     </div>
 
-    <!-- Part 1: Foundations of Multi-Sensory AI -->
-    <div class="tab-content row justify-content-center">
-      <div role="tabpanel" class="col-lg-9 tab-pane show active" id="part-1">
-        <h3>Part 1 (45 min): Foundations of Multi-Sensory AI</h3>
-        <h4>Paul Liang</h4>
+    <div class="row">
 
-        <div class="row agenda-item">
-          <div class="col-md-3">10 min</div>
-          <div class="col-md-9">
-            <h4>Introduction to Multi-Modal AI</h4>
-          </div>
-        </div>
-
-        <div class="row agenda-item">
-          <div class="col-md-3">10 min</div>
-          <div class="col-md-9">
-            <h4>AI for Tactile Sensing</h4>
-          </div>
-        </div>
-
-        <div class="row agenda-item">
-          <div class="col-md-3">10 min</div>
-          <div class="col-md-9">
-            <h4>AI for Olfaction</h4>
-          </div>
-        </div>
-
-        <div class="row agenda-item">
-          <div class="col-md-3">10 min</div>
-          <div class="col-md-9">
-            <h4>AI Reasoning</h4>
-          </div>
-        </div>
-
-        <div class="row agenda-item">
-          <div class="col-md-3">5 min</div>
-          <div class="col-md-9">
-            <h4>Q&A and Open Discussion</h4>
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+        <div class="member">
+          <img src="assets/img/projects/nlos_track.gif" alt="">
+          <h4>Tracking Hidden Objects with Consumer LiDAR</h4>
+          <span>Somasundaram et al.</span>
+          <p>In Submission</p>
+          <div class="social">
+            <a href="" target="_blank"><i class="bi bi-link"></i></a>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Part 2: Applications of Multi-Sensory AI for Extreme Sensing -->
-    <div class="tab-content row justify-content-center">
-      <div role="tabpanel" class="col-lg-9 tab-pane show active" id="part-2">
-        <h3>Part 2 (45 min): Applications of Multimodal AI for Extreme Sensing</h3>
-
-        <div class="row agenda-item">
-          <div class="col-md-3">10 min</div>
-          <div class="col-md-9">
-            <h4>Seeing Around Corners with Consumer Single-Photon Cameras</h4>
-            <p>Siddharth Somasundaram</p>
-          </div>
-        </div>
-
-        <div class="row agenda-item">
-          <div class="col-md-3">10 min</div>
-          <div class="col-md-9">
-            <h4>What’s in an Picture? Unlocking Hidden Cues in Imaging</h4>
-            <p>Nikhil Behari</p>
-          </div>
-        </div>
-
-        <div class="row agenda-item">
-          <div class="col-md-3">10 min</div>
-          <div class="col-md-9">
-            <h4>AI-Driven Design of Vision Systems</h4>
-            <p>Tzofi Klinghoffer</p>
-          </div>
-        </div>
-
-        <div class="row agenda-item">
-          <div class="col-md-3">15 min</div>
-          <div class="col-md-9">
-            <h4>Open Q&A and Discussion</h4>
+      
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+        <div class="member">
+          <img src="assets/img/projects/enhancing.gif" alt="">
+          <h4>Enhancing Autonomous Navigation by Imaging Hidden Objects Using Single-Photon LiDAR</h4>
+          <span>Young et al.</span>
+          <p>ICRA 2025</p>
+          <div class="social">
+            <a href="https://arxiv.org/abs/2410.03555" target="_blank"><i class="bi bi-link"></i></a>
           </div>
         </div>
       </div>
+
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+        <div class="member">
+          <img src="assets/img/projects/bls3d.gif" alt="">
+          <h4>Blurred LiDAR for Sharper 3D: Robust Handheld 3D Scanning with Diffuse LiDAR and RGB</h4>
+          <span>Behari et al.</span>
+          <p>CVPR 2025</p>
+          <div class="social">
+            <a href="https://nikhilbehari.github.io/bls3d-web/" target="_blank"><i class="bi bi-link"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+        <div class="member">
+          <img src="assets/img/projects/platonerf.gif" alt="">
+          <h4>PlatoNeRF: 3D Reconstruction in Plato's Cave via Single-View Two-Bounce LiDAR</h4>
+          <span>Klinghoffer et al.</span>
+          <p>CVPR 2024</p>
+          <div class="social">
+            <a href="http://platonerf.github.io" target="_blank"><i class="bi bi-link"></i></a>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    
+
   </div>
-</section><!-- End Why Us Section -->
+</section>
+<!-- End Research Section -->
+
 
 
 
@@ -302,7 +258,7 @@
     <div class="container">
 
       <div class="copyright">
-        <h4>Extreme Sensing@MIT</h4>
+        <h4>Extreme Sensing with Single Photons</h4>
         <br>
         2025
       </div>
@@ -313,7 +269,6 @@
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/day-multipurpose-html-template-for-free/ -->
       <!--  &copy; Copyright <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
-      Website source code and design from <a href="https://desoc.media.mit.edu">Desoc@MIT</a> 
       </div>
     </div>
   </footer><!-- End Footer -->

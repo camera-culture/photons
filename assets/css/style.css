@@ -15,24 +15,38 @@ body {
   color: #444444;
 }
 
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  color: #333;
+  letter-spacing: 0.2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+
 a {
-  color: #cc1616;
+  color: #bccde8;
   text-decoration: none;
 }
 
 a:hover {
-  color: #e82d2d;
+  color: #bccde8;
   text-decoration: none;
 }
-
+/* 
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Raleway", sans-serif;
-}
+  font-family: "Open Sans", sans-serif;
+} */
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -44,7 +58,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #cc1616;
+  background: #bccde8;
   width: 40px;
   height: 40px;
   transition: all 0.4s;
@@ -57,7 +71,7 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #e72323;
+  background: #bccde8;
   color: #fff;
 }
 
@@ -85,7 +99,7 @@ h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #cc1616;
+  border: 6px solid #bccde8;
   border-top-color: #efefef;
   border-radius: 50%;
   width: 60px;
@@ -145,7 +159,7 @@ h6 {
 }
 
 #topbar .contact-info i {
-  color: #cc1616;
+  color: #bccde8;
   line-height: 0;
   margin-right: 5px;
 }
@@ -181,12 +195,12 @@ h6 {
 }
 
 #header .logo {
-  font-size: 30px;
+  font-size: 24px;
   margin: 0;
   padding: 0;
   line-height: 1;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-weight: 300;
+  letter-spacing: 0px;
 }
 
 #header .logo a {
@@ -250,7 +264,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  background: #cc1616;
+  background: #bccde8;
 }
 
 .navbar .dropdown ul {
@@ -329,7 +343,7 @@ h6 {
 }
 
 .mobile-nav-toggle.bi-x {
-  color: #cc1616;
+  color: #bccde8;
 }
 
 @media (max-width: 991px) {
@@ -383,7 +397,7 @@ h6 {
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-  color: #cc1616;
+  color: #bccde8;
   background: none;
 }
 
@@ -419,7 +433,7 @@ h6 {
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover>a {
-  color: #cc1616;
+  color: #bccde8;
 }
 
 .navbar-mobile .dropdown>.dropdown-active {
@@ -431,8 +445,8 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: calc(100vh - 510px);
-  background: url("../img/hero-bg.gif") top center;
+  height: calc(60vh - 110px);
+  background: url("../img/trillion_fps.gif") top center;
   background-size: cover;
   position: relative;
 }
@@ -450,20 +464,22 @@ h6 {
 #hero h1 {
   margin: 0 0 10px 0;
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 300;
   line-height: 56px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #fff;
 }
 
 #hero h2 {
   color: #eee;
   margin-bottom: 30px;
-  font-size: 24px;
+  font-size: 20px;
+  /* font-style: italic; */
+  font-weight: 300px;
 }
 
 #hero .btn-get-started {
-  font-family: "Raleway", sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 14px;
@@ -476,8 +492,8 @@ h6 {
 }
 
 #hero .btn-get-started:hover {
-  background: #cc1616;
-  border-color: #cc1616;
+  background: #bccde8;
+  border-color: #bccde8;
 }
 
 @media (min-width: 1024px) {
@@ -545,7 +561,7 @@ h6 {
 }
 
 #hero1 .btn-get-started {
-  font-family: "Raleway", sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 14px;
@@ -558,8 +574,8 @@ h6 {
 }
 
 #hero1 .btn-get-started:hover {
-  background: #cc1616;
-  border-color: #cc1616;
+  background: #bccde8;
+  border-color: #bccde8;
 }
 
 @media (min-width: 1024px) {
@@ -593,20 +609,20 @@ h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 10px 0;
   overflow: hidden;
 }
 
 .section-title {
   text-align: center;
-  padding: 30px 0;
+  padding: 20px 0;
   position: relative;
 }
 
 .section-title h2 {
   font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
   padding-bottom: 0;
   color: #191919;
   position: relative;
@@ -620,9 +636,9 @@ section {
   left: 0;
   right: 0;
   z-index: 1;
-  font-weight: 700;
-  font-size: 52px;
-  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 42px;
+  /* text-transform: uppercase; */
   line-height: 0;
 }
 
@@ -663,7 +679,7 @@ section {
 .about .content ul i {
   font-size: 20px;
   padding-right: 4px;
-  color: #cc1616;
+  color: #bccde8;
 }
 
 .about .content p:last-child {
@@ -706,7 +722,7 @@ section {
 }
 
 .why-us .box:hover {
-  background: #cc1616;
+  background: #bccde8;
   padding: 30px 30px 70px 30px;
   box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.18);
 }
@@ -759,7 +775,7 @@ section {
   margin: 0 auto;
   width: 64px;
   height: 64px;
-  background: #cc1616;
+  background: #bccde8;
   transition: all 0.3s ease-out 0s;
   display: flex;
   align-items: center;
@@ -802,8 +818,8 @@ section {
 }
 
 .services .icon-box:hover {
-  background: #cc1616;
-  border-color: #cc1616;
+  background: #bccde8;
+  border-color: #bccde8;
   padding: 70px 20px 90px 20px;
 }
 
@@ -812,7 +828,7 @@ section {
 }
 
 .services .icon-box:hover .icon i {
-  color: #cc1616;
+  color: #bccde8;
 }
 
 .services .icon-box:hover .icon::before {
@@ -844,7 +860,7 @@ section {
 }
 
 .cta .cta-btn {
-  font-family: "Raleway", sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 14px;
@@ -858,8 +874,8 @@ section {
 }
 
 .cta .cta-btn:hover {
-  background: #cc1616;
-  border: 2px solid #cc1616;
+  background: #bccde8;
+  border: 2px solid #bccde8;
 }
 
 /*--------------------------------------------------------------
@@ -936,7 +952,7 @@ section {
 
 .portfolio .portfolio-item .portfolio-info .preview-link:hover,
 .portfolio .portfolio-item .portfolio-info .details-link:hover {
-  color: #cc1616;
+  color: #bccde8;
 }
 
 .portfolio .portfolio-item .portfolio-info .details-link {
@@ -991,11 +1007,11 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #cc1616;
+  border: 1px solid #bccde8;
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #cc1616;
+  background-color: #bccde8;
 }
 
 .portfolio-details .portfolio-info {
@@ -1058,7 +1074,7 @@ section {
 
 .pricing .box h4 {
   font-size: 42px;
-  color: #cc1616;
+  color: #bccde8;
   font-weight: 500;
   font-family: "Open Sans", sans-serif;
   margin-bottom: 20px;
@@ -1090,7 +1106,7 @@ section {
 }
 
 .pricing .box ul i {
-  color: #cc1616;
+  color: #bccde8;
   font-size: 18px;
   padding-right: 4px;
 }
@@ -1106,14 +1122,14 @@ section {
 }
 
 .pricing .box .btn-buy {
-  background: #cc1616;
+  background: #bccde8;
   display: inline-block;
   padding: 10px 40px;
   color: #fff;
   transition: none;
   font-size: 14px;
   font-weight: 400;
-  font-family: "Raleway", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   transition: 0.3s;
 }
@@ -1123,7 +1139,7 @@ section {
 }
 
 .pricing .featured {
-  background: #cc1616;
+  background: #bccde8;
   box-shadow: none;
   color: #fff;
 }
@@ -1151,18 +1167,93 @@ section {
 
 .pricing .featured .btn-buy:hover {
   background: #fff;
-  color: #cc1616;
+  color: #bccde8;
 }
 
 /*--------------------------------------------------------------
 # Team
 --------------------------------------------------------------*/
+/* Responsive stability for team and research cards */
+@media (max-width: 1200px) {
+  .team .row,
+  #research .row {
+    justify-content: center;
+  }
+
+  .team .member,
+  #research .member {
+    max-width: 340px;
+    margin: 0 auto 30px auto;
+  }
+
+  .team .member img,
+  #research .member img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+/* Ultra-narrow devices */
+@media (max-width: 480px) {
+  .team .member,
+  #research .member {
+    width: 95%;
+    max-width: 320px;
+    padding: 20px 15px;
+    box-sizing: border-box;
+  }
+
+  .team .member img,
+  #research .member img {
+    max-width: 80%;
+    margin: 0 auto 15px auto;
+    display: block;
+  }
+
+  .team .member h4,
+  #research .member h4 {
+    font-size: 1.1rem;
+  }
+
+  .team .member span,
+  #research .member span {
+    font-size: 0.9rem;
+  }
+
+  .team .member p,
+  #research .member p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Safety for extremely small widths (under 360px) */
+@media (max-width: 360px) {
+  .team .member,
+  #research .member {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+  }
+
+  .team .member img,
+  #research .member img {
+    max-width: 70%;
+  }
+}
+
+
 .team .member {
   text-align: center;
   margin-bottom: 20px;
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
   padding: 30px 20px;
   background: #fff;
+  border-radius: 16px;
+}
+
+#research .member {
+  padding: 30px 10px;
 }
 
 .team .member img {
@@ -1171,10 +1262,21 @@ section {
   margin: 0 0 30px 0;
 }
 
+
+#research .member img {
+  border-radius: 0;
+}
+
+
 .team .member h4 {
   font-weight: 700;
   margin-bottom: 2px;
   font-size: 18px;
+}
+
+#research .member h4 {
+  font-weight: 400; 
+  font-size: 16px; 
 }
 
 .team .member span {
@@ -1200,7 +1302,7 @@ section {
 }
 
 .team .member .social a:hover {
-  color: #cc1616;
+  color: #bccde8;
 }
 
 .team .member .social i {
@@ -1222,7 +1324,7 @@ section {
 
 .contact .info-box i {
   font-size: 32px;
-  color: #cc1616;
+  color: #bccde8;
   border-radius: 50%;
   padding: 8px;
   border: 2px dotted #f5a0a0;
@@ -1298,7 +1400,7 @@ section {
 
 .contact .php-email-form input::focus,
 .contact .php-email-form textarea::focus {
-  background-color: #cc1616;
+  background-color: #bccde8;
 }
 
 .contact .php-email-form input {
@@ -1310,7 +1412,7 @@ section {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #cc1616;
+  background: #bccde8;
   border: 0;
   padding: 10px 24px;
   color: #fff;
@@ -1378,10 +1480,11 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #0c0c0c;
+  background: #191919;
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
+  font-weight: 300;
 }
 
 #footer .footer-top {
@@ -1392,7 +1495,7 @@ section {
   margin-bottom: 15px;
   background: #191919;
   color: #fff;
-  border-top: 4px solid #cc1616;
+  border-top: 4px solid #bccde8;
   text-align: center;
   padding: 30px 20px;
 }
@@ -1409,7 +1512,7 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Raleway", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 #footer .footer-top .social-links a {
@@ -1428,7 +1531,7 @@ section {
 }
 
 #footer .footer-top .social-links a:hover {
-  background: #cc1616;
+  background: #bccde8;
   color: #fff;
   text-decoration: none;
 }
@@ -1502,7 +1605,7 @@ section {
   background: none;
   font-size: 16px;
   padding: 0 20px;
-  background: #cc1616;
+  background: #bccde8;
   color: #fff;
   transition: 0.3s;
   border-radius: 4;
@@ -1513,9 +1616,10 @@ section {
 }
 
 #footer .copyright {
-  border-top: 1px solid #262626;
+  /* border-top: 1px solid #262626; */
   text-align: center;
   padding-top: 30px;
+  /* font-weight: 300; */
 }
 
 #footer .credits {
