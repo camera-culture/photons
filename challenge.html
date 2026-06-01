@@ -6,122 +6,588 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Challenge: All-Photon Perception with Low-Cost LiDARs</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta content="A CVPR 2026 CCD Workshop challenge on scene understanding from low-cost SPAD LiDARs, in line of sight and around corners." name="description">
+  <meta content="SPAD, LiDAR, NLoS, single-photon, transient imaging, TMF8828, VL53L8CX, CVPR 2026" name="keywords">
 
-  <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Day - v4.9.0
-  * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <!-- ======= Challenge styling: liquid glass ======= -->
+  <style>
+    :root {
+      --bg:      #1a1b20;     /* lighter neutral dark */
+      --head:    #f1f3f6;
+      --text:    #d6d9df;
+      --muted:   #a1a5ae;
+      --faint:   #71747d;
+      --hair:    rgba(255,255,255,.11);
+      --accent:  #bccde8;     /* lab periwinkle: links + labels */
+      --accent-h:#ffffff;
+      --live:   #7aa2f7;     /* activated blue, open / live only */
+      --sans: "Helvetica Neue", "Helvetica", "Arial Nova", Arial, sans-serif;
+      --blur: saturate(1.7) blur(22px);
+      --t-label: 12px; --t-meta: 13px; --t-body: 14px; --t-read: 15px; --t-base: 16px; --t-title: 16px;
+    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+    body.ch { font-family: var(--sans); color: var(--text); font-size: var(--t-base); line-height: 1.7; background: var(--bg); letter-spacing: .002em; }
+    body.ch:before {
+      content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(1100px 640px at 82% -10%, rgba(188,205,232,.06), transparent 60%),
+        radial-gradient(900px 560px at 0% 104%, rgba(188,205,232,.04), transparent 56%);
+    }
+    .grain { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"); }
+    .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    .ch h1, .ch h2, .ch h3, .ch h4, .ch h5 { font-family: var(--sans); color: var(--head); font-weight: 600; }
+    .ch .container { max-width: 1060px; }
+    .ch ::selection { background: rgba(188,205,232,.28); }
+
+    /* Liquid glass: frosted fill, crisp lit top edge, soft floated depth */
+    .glass {
+      position: relative;
+      background:
+        linear-gradient(156deg, rgba(255,255,255,.1), rgba(255,255,255,.04) 52%, rgba(255,255,255,.055)),
+        rgba(19,20,25,.26);
+      -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+      border: 1px solid rgba(255,255,255,.14); border-radius: 20px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.5),
+        inset 0 -1px 0 rgba(0,0,0,.22),
+        0 16px 40px -22px rgba(0,0,0,.55);
+    }
+    .glass::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      background: linear-gradient(150deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,0) 36%, rgba(255,255,255,0) 74%, rgba(255,255,255,.035) 100%);
+    }
+    @supports (backdrop-filter: url(#glassDistort)) {
+      .glass { backdrop-filter: url(#glassDistort) saturate(1.6) blur(13px); }
+    }
+    @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+      .glass { background: rgba(36,38,46,.96); }
+    }
+
+    /* Header: template handles static -> fixed-on-scroll; we only restyle */
+    #header, #header.fixed-top, #header.header-scrolled {
+      background: rgba(22,23,28,.72); -webkit-backdrop-filter: saturate(1.5) blur(16px); backdrop-filter: saturate(1.5) blur(16px);
+      border-bottom: 1px solid var(--hair); box-shadow: none;
+    }
+    #header .logo a { color: var(--head); font-weight: 600; letter-spacing: -.01em; font-size: var(--t-title); }
+    #header .navbar a, #header .navbar a:focus { color: var(--muted); font-size: var(--t-body); font-weight: 500; }
+    #header .navbar a:hover, #header .navbar .active { color: var(--accent-h); }
+    #header .mobile-nav-toggle { color: #e6e7ea; }
+    #navbar.navbar-mobile { background: rgba(14,15,19,.55); }
+    #navbar.navbar-mobile ul { background: #1c1d23; border: 1px solid var(--hair); }
+    #navbar.navbar-mobile a, #navbar.navbar-mobile a:focus { color: var(--text); }
+    #navbar.navbar-mobile a:hover, #navbar.navbar-mobile .active { color: var(--accent-h); }
+
+    /* Hero */
+    #ch-hero { position: relative; overflow: hidden; padding: 58px 0 88px; }
+    #ch-hero .hero-bg { position: absolute; inset: -6%; z-index: 0;
+      background: url("assets/img/trillion_fps.gif") center/cover no-repeat;
+      filter: grayscale(.82) brightness(.56) contrast(1.04); transform: scale(1.06); }
+    #ch-hero .hero-bg:after { content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(26,27,32,.42), rgba(26,27,32,.8)); }
+    #ch-hero .container { position: relative; z-index: 2; }
+    #ch-hero .eyebrow { font-size: var(--t-meta); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 22px; }
+    #ch-hero h1 { color: #fff; font-weight: 300; font-size: clamp(28px, 7vw, 58px); line-height: 1.08; letter-spacing: -.025em; margin: 0 0 22px; text-shadow: 0 2px 30px rgba(0,0,0,.45); overflow-wrap: break-word; text-wrap: balance; }
+    #ch-hero .state { margin-top: 28px; font-size: var(--t-read); color: var(--text); }
+    #ch-hero .state b { color: var(--live); font-weight: 600; }
+    #ch-hero .state .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--live); margin-right: 9px; vertical-align: middle; box-shadow: 0 0 8px rgba(150,182,255,.65); animation: blink 2s infinite; }
+    #ch-hero .links { margin-top: 34px; display: flex; gap: 14px 22px; flex-wrap: wrap; align-items: center; }
+    #ch-hero .hero-note { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-weight: 500; font-size: var(--t-body); border-bottom: 1px solid rgba(188,205,232,.35); padding-bottom: 2px; transition: .2s; }
+    #ch-hero .hero-note:hover { color: #fff; border-color: rgba(255,255,255,.5); }
+    #ch-hero .hero-note i { font-size: 13px; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.45} }
+
+    /* Glass pills / buttons */
+    .pill {
+      -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+      border-radius: 40px; padding: 12px 24px; font-weight: 600; font-size: var(--t-body);
+      display: inline-flex; align-items: center; gap: 8px; transition: .2s;
+      background: linear-gradient(140deg, rgba(255,255,255,.17), rgba(255,255,255,.06)); color: #f1f2f5;
+      border: 1px solid rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 12px 24px -12px rgba(0,0,0,.55);
+    }
+    .pill:hover { color: #fff; transform: translateY(-1px); border-color: rgba(255,255,255,.34); }
+    .pill.alt {
+      background: linear-gradient(150deg, rgba(188,205,232,.22), rgba(188,205,232,.06)); color: #eef3fc;
+      border-color: rgba(188,205,232,.45); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 0 24px -8px rgba(188,205,232,.5);
+    }
+    .pill.alt:hover { color: #fff; border-color: rgba(188,205,232,.65); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 0 32px -6px rgba(188,205,232,.65); }
+
+    /* Liquid-glass chips (track references) */
+    .chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #e2e8f4; white-space: nowrap;
+      background: linear-gradient(150deg, rgba(188,205,232,.16), rgba(188,205,232,.05)); border: 1px solid rgba(188,205,232,.3);
+      border-radius: 30px; padding: 4px 11px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.28); transition: .2s; }
+    .chip:hover { color: #fff; border-color: rgba(188,205,232,.55); transform: translateY(-1px); }
+    .chip.live { color: #eaf1ff; background: linear-gradient(150deg, rgba(150,182,255,.26), rgba(122,162,247,.08)); border-color: rgba(188,210,255,.45); }
+    .chip.live:hover { color: #fff; border-color: rgba(208,225,255,.7); }
+    .pill.live {
+      background: linear-gradient(150deg, rgba(150,182,255,.34), rgba(122,162,247,.13) 58%, rgba(122,162,247,.2)); color: #fff;
+      border-color: rgba(188,210,255,.55); box-shadow: inset 0 1px 0.5px rgba(255,255,255,.7), 0 12px 28px -14px rgba(0,0,0,.5);
+    }
+    .pill.live:hover { color: #fff; transform: translateY(-1px); border-color: rgba(208,225,255,.72); box-shadow: inset 0 1px 0.5px rgba(255,255,255,.75), 0 0 28px -8px rgba(150,182,255,.5); }
+
+    /* Sections */
+    .sec { padding: 58px 0; position: relative; }
+    .sec > .container > h2 { font-weight: 600; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--text); margin: 0 0 18px; display: flex; align-items: center; gap: 18px; }
+    .sec > .container > h2:after { content: ""; flex: 1; height: 1px; background: var(--hair); }
+    .sec .intro { color: var(--text); font-size: var(--t-read); line-height: 1.6; margin: 0 0 34px; max-width: 660px; }
+    .sec .intro a { color: var(--accent); font-weight: 600; }
+
+    .lede { font-size: 18px; line-height: 1.65; color: #eef0f3; max-width: 820px; font-weight: 300; letter-spacing: -.005em; }
+    .lede b { color: #fff; font-weight: 500; }
+    .lede a { color: var(--accent); font-weight: 500; border-bottom: 1px solid rgba(188,205,232,.35); }
+    .lede a:hover { color: #fff; border-color: rgba(255,255,255,.5); }
+
+    /* Track cards */
+    .track { padding: 22px 20px; height: 100%; display: flex; flex-direction: column; transition: transform .25s, border-color .25s; }
+    .track:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.22); }
+    .track.open { border-color: rgba(166,194,255,.6);
+      background: linear-gradient(156deg, rgba(150,182,255,.16), rgba(255,255,255,.04) 50%, rgba(150,182,255,.09)), rgba(20,22,28,.3);
+      animation: openpulse 2.8s ease-in-out infinite; }
+    @keyframes openpulse {
+      0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 0 0 1px rgba(150,182,255,.18), 0 16px 42px -22px rgba(150,182,255,.3), 0 16px 40px -24px rgba(0,0,0,.5); }
+      50% { box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 0 0 1px rgba(150,182,255,.38), 0 22px 58px -18px rgba(150,182,255,.6), 0 16px 40px -24px rgba(0,0,0,.5); }
+    }
+    .track .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    .track .no { font-weight: 600; font-size: var(--t-meta); color: var(--faint); letter-spacing: .13em; }
+    .track.open .no { color: var(--live); }
+    .track .st { font-size: 10.5px; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+    .track .st.open { color: #fff; background: linear-gradient(150deg, rgba(172,200,255,.54), rgba(122,162,247,.28)); border: 1px solid rgba(206,224,255,.64); box-shadow: inset 0 1px 0 rgba(255,255,255,.66), 0 5px 18px -5px rgba(122,162,247,.65); font-size: 10px; letter-spacing: .1em; padding: 4px 11px 4px 9px; border-radius: 30px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+    .track .st.open .d { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #ffffff; margin-right: 6px; vertical-align: middle; animation: blink 1.7s infinite; }
+    .track h4 { font-size: var(--t-title); font-weight: 600; margin: 0 0 9px; line-height: 1.35; letter-spacing: -.01em; }
+    .track p { color: var(--text); font-size: var(--t-body); line-height: 1.6; margin: 0; }
+    .track .r { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--hair); display: flex; flex-wrap: wrap; gap: 7px; }
+
+    /* Get-started quickstart cards */
+    .qs { padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
+    .qs-top { height: 176px; display: flex; background: #131419; border-bottom: 1px solid var(--hair); }
+    .qs-top figure { flex: 1; margin: 0; position: relative; overflow: hidden; min-width: 0; }
+    .qs-top figure + figure { border-left: 1px solid var(--hair); }
+    .qs-top img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .qs-top.rt img { object-position: center 16%; }
+    .qs-top figcaption { position: absolute; top: 9px; left: 10px; font-size: 9.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text); background: rgba(8,8,10,.55); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); padding: 2px 8px; border-radius: 12px; }
+    .qs-b { padding: 22px; display: flex; flex-direction: column; flex-grow: 1; }
+    .qs-b h4 { font-size: 17px; font-weight: 600; margin: 0 0 18px; letter-spacing: -.01em; }
+    /* numbered steps inside a quickstart card */
+    .qsteps { list-style: none; counter-reset: s; padding: 0; margin: 0; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+    .qsteps > li { counter-increment: s; position: relative; padding: 0 0 16px 33px; }
+    .qsteps > li:last-child { padding-bottom: 0; }
+    .qsteps > li:before { content: counter(s); position: absolute; left: 0; top: -1px; width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.06); border: 1px solid var(--hair); color: var(--head); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; z-index: 1; }
+    .qsteps > li:not(:last-child):after { content: ""; position: absolute; left: 10.5px; top: 24px; bottom: 3px; width: 1px; background: var(--hair); }
+    .qsteps .t { color: var(--head); font-weight: 600; font-size: var(--t-body); line-height: 1.3; padding-top: 3px; }
+    .qsteps .cc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .qsteps .code { margin: 10px 0 0; font-size: 11px; padding: 9px 11px; line-height: 1.75; }
+
+    .code { background: rgba(0,0,0,.3); border: 1px solid var(--hair); border-radius: 10px; padding: 13px 15px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11.5px; color: #e1e3e8; line-height: 1.85; white-space: pre-wrap; word-break: break-word; margin: 0 0 16px; }
+    .code .p { color: #aac3ea; }
+
+    /* Toolkit cards */
+    .refcard { overflow: hidden; height: 384px; display: flex; flex-direction: column; transition: transform .25s, border-color .25s; }
+    .refcard:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.22); }
+    .refcard .thumb { position: relative; height: 148px; }
+    .refcard .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .refcard .b { padding: 17px 19px 18px; display: flex; flex-direction: column; flex-grow: 1; position: relative; z-index: 1; }
+    .refcard .v { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .refcard h4 { font-size: var(--t-body); font-weight: 600; line-height: 1.36; margin: 0 0 7px; letter-spacing: -.012em; }
+    .refcard h4 a { color: var(--head); }
+    .refcard h4 a:hover { color: var(--accent-h); }
+    .refcard .au { font-size: 12px; color: var(--muted); margin: 0 0 13px; flex-grow: 1; }
+    .refcard .lk { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 13px; border-top: 1px solid var(--hair); }
+    .refcard .lk i { display: none; }
+    .refcard .lk a { font-size: 11px; font-weight: 600; color: #e2e8f4; white-space: nowrap;
+      background: linear-gradient(150deg, rgba(188,205,232,.16), rgba(188,205,232,.05)); border: 1px solid rgba(188,205,232,.3);
+      border-radius: 30px; padding: 4px 11px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.28); transition: .2s; }
+    .refcard .lk a:hover { color: #fff; border-color: rgba(188,205,232,.55); }
+
+    /* Related-work tile (last toolkit cell) */
+    .moretile .b { padding: 20px 21px; }
+    .moretile .v { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .mlist { list-style: none; padding: 0; margin: 0; max-height: 314px; overflow-y: auto; padding-right: 9px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.2) transparent; }
+    .mlist li { padding: 11px 0; border-top: 1px solid var(--hair); line-height: 1.4; }
+    .mlist li:first-child { border-top: none; }
+    .mlist a { color: var(--accent); font-weight: 600; font-size: var(--t-meta); display: block; }
+    .mlist a:hover { color: var(--accent-h); }
+    .mlist span { color: var(--muted); font-size: 11px; }
+    .mlist::-webkit-scrollbar { width: 5px; }
+    .mlist::-webkit-scrollbar-thumb { background: rgba(255,255,255,.16); border-radius: 3px; }
+    .mlist::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.3); }
+    .mlist::-webkit-scrollbar-track { background: transparent; }
+    .moretile .b { position: relative; }
+    .moretile .b:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 34px; pointer-events: none; background: linear-gradient(to top, rgba(19,20,25,.92), rgba(19,20,25,0)); border-radius: 0 0 20px 20px; }
+
+    /* Schedule: horizontal, evolving */
+    .htl { display: flex; flex-wrap: wrap; position: relative; }
+    .htl:before { content: ""; position: absolute; top: 5px; left: 6px; right: 10px; height: 1px; background: linear-gradient(90deg, var(--hair), var(--hair) 72%, transparent); }
+    .htl .i { flex: 1 1 0; min-width: 190px; position: relative; padding: 26px 22px 0 0; }
+    .htl .i:before { content: ""; position: absolute; top: 0; left: 0; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 1px solid var(--faint); }
+    .htl .i.on:before { background: var(--live); border-color: var(--live); box-shadow: 0 0 7px rgba(122,162,247,.5); }
+    .htl .i.more:before { border-style: dashed; background: transparent; }
+    .htl .d { font-size: var(--t-meta); font-weight: 600; color: var(--muted); letter-spacing: .04em; }
+    .htl .i.on .d { color: var(--live); }
+    .htl h5 { font-size: var(--t-read); font-weight: 600; margin: 5px 0 5px; letter-spacing: -.01em; }
+    .htl p { color: var(--muted); font-size: var(--t-body); margin: 0; line-height: 1.5; }
+    .htl .i.more h5 { color: var(--muted); font-weight: 500; }
+    @media (max-width: 600px) { .htl:before { display: none; } .htl .i { flex: 1 1 100%; padding: 20px 0 0 22px; } .htl .i:before { left: 0; top: 3px; } }
+
+    /* Participate */
+    .btn-textl { color: var(--accent); font-weight: 600; font-size: var(--t-body); padding: 12px 4px; display: inline-flex; align-items: center; gap: 7px; }
+    .btn-textl:hover { color: var(--accent-h); }
+
+    /* Organizers */
+    .people { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .ppl-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); font-weight: 600; margin: 0 0 16px; }
+    .person { display: block; padding: 18px 20px; transition: transform .2s, border-color .2s; }
+    .person .nm { position: relative; font-weight: 600; font-size: var(--t-read); color: var(--head); letter-spacing: -.01em; }
+    .person .af { position: relative; color: var(--muted); font-size: var(--t-meta); margin-top: 3px; }
+    a.person { text-decoration: none; }
+    a.person:hover { transform: translateY(-2px); border-color: rgba(188,205,232,.45); }
+    a.person:hover .nm { color: var(--accent); }
+    @media (max-width: 860px) { .people { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .people { grid-template-columns: 1fr; } }
+
+    /* Footer */
+    #footer { background: rgba(0,0,0,.28); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-top: 1px solid var(--hair); padding: 22px 0; text-align: left; }
+    #footer .copyright, #footer .copyright h4 { color: var(--muted); font-family: var(--sans); font-weight: 400; font-size: 13px; margin: 0; text-align: left; padding: 0; }
+    #footer .credits { color: var(--faint); font-family: var(--sans); font-size: 13px; margin-top: 6px; text-align: left; padding: 0; }
+    #footer .credits a { color: var(--accent); }
+    #footer .credits a:hover { color: var(--accent-h); }
+
+    /* Back-to-top: round frosted glass, on theme */
+    .back-to-top { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.08); border: 1px solid var(--hair); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 8px 22px -10px rgba(0,0,0,.6); transition: .2s; }
+    .back-to-top i { color: var(--text); font-size: 22px; line-height: 0; }
+    .back-to-top:hover { background: rgba(255,255,255,.14); }
+    .back-to-top:hover i { color: #fff; }
+
+    @media (max-width: 991px) { #ch-hero { padding: 40px 0 62px; } }
+    @media (max-width: 768px) {
+      .sec { padding: 54px 0; }
+      .lede { font-size: 17px; }
+    }
+  </style>
 </head>
 
-<body>
+<body class="ch">
 
+  <!-- liquid-glass refraction (Chromium) + film grain -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="glassDistort" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.013 0.013" numOctaves="2" seed="13" result="n"/>
+      <feGaussianBlur in="n" stdDeviation="1.3" result="nb"/>
+      <feDisplacementMap in="SourceGraphic" in2="nb" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
-
       <h1 class="logo">
-        <img src="./assets/img/photons.png" alt="CC Logo"
+        <img src="./assets/img/photons.png" alt="Logo"
           style="height: 2em; vertical-align: middle; margin-right: 0.3em; margin-bottom: 0.1em">
-        <a href="index.html">Challenge: All-Photon Perception with Low-Cost LiDARs</a>
+        <a href="index.html">All-Photon Perception Challenge</a>
       </h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
-
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Challenge</a></li>
+          <li><a class="nav-link scrollto" href="#tracks">Tracks</a></li>
+          <li><a class="nav-link scrollto" href="#start">Get Started</a></li>
+          <li><a class="nav-link scrollto" href="#references">Toolkit</a></li>
+          <li><a class="nav-link scrollto" href="#participate">Participate</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+      </nav>
     </div>
-  </header><!-- End Header -->
+  </header>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
-      <h1>Challenge: All-Photon Perception with Low-Cost LiDARs</h1>
-      <h2>
-        <img src="./assets/img/cc_logo.png" alt="CC Logo"
-          style="height: 1.4em; vertical-align: middle; margin-right: 0.3em; margin-bottom: 0.1em">
-        CVPR 2026 CCD Workshop
-      </h2>
-      <br>
-      <br>
+  <!-- ======= Hero ======= -->
+  <section id="ch-hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12" data-aos="fade-up">
+          <div class="eyebrow">CVPR 2026 &middot; Computational Cameras and Displays</div>
+          <h1>All&#8209;Photon Perception with Low&#8209;Cost LiDARs</h1>
+          <div class="state"><span class="dot"></span><b>Track 1, Applications of Consumer LiDAR, is open for submissions.</b> &nbsp;Tracks 2&ndash;4 release Fall 2026.</div>
+          <div class="links">
+            <a class="pill live" href="https://docs.google.com/forms/d/e/1FAIpQLSdJJbDUDjDAKZCRruDeZQBBdn6PgiKELNMYFIc1stYbGLXWng/viewform" target="_blank"><i class="bi bi-arrow-up-right"></i> Submit to Track 1</a>
+            <a class="pill alt" href="#start">Get started</a>
+            <a class="hero-note" href="https://docs.google.com/forms/d/e/1FAIpQLSea8opzj3hRyey1VddIIyUooo1hRWdam1AEPw9GXLi1CV4bPA/viewform" target="_blank"><i class="bi bi-bell"></i> Sign up for updates</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- ======= Overview ======= -->
+  <section class="sec">
+    <div class="container">
+      <p class="lede" data-aos="fade-up">
+        The MIT Media Lab <a href="https://www.media.mit.edu/groups/camera-culture/overview/" target="_blank">Camera Culture</a> group,
+        in collaboration with the <a href="https://akshatdave.github.io/" target="_blank">Photon Intelligence Lab</a> (Akshat Dave, Stony Brook)
+        and the <a href="https://www.media.mit.edu/groups/multisensory-intelligence/" target="_blank">Multisensory Intelligence</a> group
+        (Paul Liang, MIT), presents the All-Photon Perception Challenge. Consumer LiDARs cost a few dollars and report only distance, yet each measures a full histogram of photon
+        arrival times, including the faint multi-bounce light that reaches surfaces the beam never pointed at, even around a
+        corner. The challenge gathers the sensors, data, and code to find <b>how much of a scene the single-photon data from consumer LiDARs can reveal</b>.
+      </p>
+    </div>
+  </section>
 
-  </section><!-- End Hero -->
-
-  <main id="main" style="margin-top: 80px; margin-bottom: 100px">
-    <section class="container" data-aos="fade-up">
-      <div class="section-title">
-        <h2>All-Photon Perception with Low-Cost LiDARs</h2>
+  <!-- ======= Tracks ======= -->
+  <section id="tracks" class="sec">
+    <div class="container">
+      <h2 data-aos="fade-up">Tracks</h2>
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up">
+          <div class="track glass open">
+            <div class="top"><span class="no">01</span><span class="st open"><span class="d"></span>OPEN NOW</span></div>
+            <h4>Applications of Consumer LiDAR</h4>
+            <p>Open to everyone: submit an application, demo, or new model built on consumer LiDAR and the toolkit below.</p>
+            <div class="r"><a class="chip live" href="https://docs.google.com/forms/d/e/1FAIpQLSdJJbDUDjDAKZCRruDeZQBBdn6PgiKELNMYFIc1stYbGLXWng/viewform" target="_blank">Submit your work <i class="bi bi-arrow-right"></i></a></div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="80">
+          <div class="track glass">
+            <div class="top"><span class="no">02</span><span class="st">Fall 2026</span></div>
+            <h4>Non-Line-of-Sight Perception</h4>
+            <p>Perceive objects hidden around a corner from multi-bounce histograms: position, size, identity, and more.</p>
+            <div class="r"><a class="chip" href="https://nikhilbehari.com/denali/" target="_blank">DENALI</a><a class="chip" href="https://cornar.media.mit.edu" target="_blank">Consumer NLoS</a></div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="160">
+          <div class="track glass">
+            <div class="top"><span class="no">03</span><span class="st">Fall 2026</span></div>
+            <h4>Single-View 3D from Coarse Transients</h4>
+            <p>Dense 3D from a single 3&times;3 or 8&times;8 view, where each coarse pixel integrates a wide field.</p>
+            <div class="r"><a class="chip" href="https://nikhilbehari.com/bls3d/" target="_blank">Blurred LiDAR</a><a class="chip" href="https://nikhilbehari.com/diffuselidar_calibrate/" target="_blank">Calibration</a></div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="240">
+          <div class="track glass">
+            <div class="top"><span class="no">04</span><span class="st">Fall 2026</span></div>
+            <h4>Simulating Low-Cost NLoS LiDAR</h4>
+            <p>Synthetic transients that match real captures: pulse shape, timing jitter, and sensor noise.</p>
+            <div class="r"><a class="chip" href="https://nikhilbehari.com/denali/" target="_blank">DENALI Twin</a><a class="chip" href="https://github.com/diegoroyo/mitransient" target="_blank">MiTransient</a></div>
+          </div>
+        </div>
       </div>
-      <p><b>Coming soon</b>: This challenge focuses on scene understanding from low-resolution, wide instantaneous field-of-view (IFoV) SPAD sensors (ams TMF8828, ST VL53L4CX) operating in both line-of-sight (LoS) and non-line-of-sight (NLoS) regimes. Participants will address three key tasks: (1) single-view 3D reconstruction from very low-resolution LoS transients (e.g., 3×3 or 8×8 SPAD arrays), where each pixel integrates light over a broad spatial region; (2) performing object localization and classification using multi-bounce NLoS signals; and (3) generating realistic simulated NLoS data of low-cost LiDARs, including accurate modeling of transient responses and sensor noise. The goal is to push the limits of active sensing in constrained, low-cost hardware settings by combining inverse problems and learning-driven approaches.</p>
-    </section>
-  </main>
+    </div>
+  </section>
 
+  <!-- ======= Get started ======= -->
+  <section id="start" class="sec">
+    <div class="container">
+      <h2 data-aos="fade-up">Get started</h2>
+      <div class="row g-4">
+        <div class="col-lg-6" data-aos="fade-up">
+          <div class="glass qs">
+            <div class="qs-top rt">
+              <figure><img src="assets/img/rig/cad_image_tmf_and_realsense.png" alt="CAD of the TMF8828 and Intel RealSense capture rig"><figcaption>CAD</figcaption></figure>
+              <figure><img src="assets/img/rig/real_image_tmf_and_realsense.png" alt="The built TMF8828 and Intel RealSense capture rig"><figcaption>Built</figcaption></figure>
+            </div>
+            <div class="qs-b">
+              <h4>Capture your own scenes</h4>
+              <ol class="qsteps">
+                <li><div class="t">Buy a kit</div><div class="cc"><a class="chip" href="https://ams-osram.com/products/boards-kits-accessories/kits/ams-tmf8828-evm-eb-shield-evaluation-kit" target="_blank">TMF8828</a><a class="chip" href="https://www.st.com/en/evaluation-tools/p-nucleo-53l8a1.html" target="_blank">VL53L8CX</a></div></li>
+                <li><div class="t">Install cc-hardware</div><div class="code"><span class="p">git</span> clone https://github.com/camera-culture/cc-hardware<br><span class="p">pip</span> install -e ./cc-hardware<br><span class="p">python</span> -m cc_hardware.tools.flash</div></li>
+                <li><div class="t">Capture histograms</div><div class="code"><span class="p">python</span> examples/sensors/spad_dashboard_cli.py sensor=TMF8828Config</div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass qs">
+            <div class="qs-top">
+              <figure><img src="assets/img/projects/denali_objects.png" alt="The hidden objects in the DENALI dataset"><figcaption>DENALI dataset</figcaption></figure>
+            </div>
+            <div class="qs-b">
+              <h4>Use our released data</h4>
+              <ol class="qsteps">
+                <li><div class="t">Request access</div><div class="cc"><a class="chip" href="https://forms.gle/4M3RQgeNWxPRSUkd8" target="_blank">DENALI dataset</a></div></li>
+                <li><div class="t">Build the dataset</div><div class="code"><span class="p">tar</span> xzf denali-dataset-cvpr2026.tar.gz<br><span class="p">cd</span> benchmark<br><span class="p">python</span> -m main_table.scripts.build_dataset --data-dir ../denali-data/data</div></li>
+                <li><div class="t">Run the baselines</div><div class="cc"><a class="chip" href="https://nikhilbehari.com/denali/" target="_blank">Project</a><a class="chip" href="https://github.com/NikhilBehari/denali" target="_blank">Code</a></div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Toolkit ======= -->
+  <section id="references" class="sec">
+    <div class="container">
+      <h2 data-aos="fade-up">Toolkit</h2>
+      <p class="intro" data-aos="fade-up">Open datasets, methods, and code you can build a Track 1 application on.</p>
+
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+          <div class="glass refcard">
+            <div class="thumb"><img src="assets/img/projects/nlos_track.gif" alt=""></div>
+            <div class="b">
+              <div class="v">Nature 2026</div>
+              <h4><a href="https://cornar.media.mit.edu" target="_blank">Imaging Hidden Objects with Consumer LiDAR via Motion-Induced Sampling</a></h4>
+              <div class="au">Somasundaram, Young, Dave, Pediredla, Raskar</div>
+              <div class="lk"><a href="https://cornar.media.mit.edu" target="_blank">Project</a><i>/</i><a href="https://www.nature.com/articles/s41586-026-10502-x" target="_blank">Nature</a><i>/</i><a href="https://github.com/sidsoma/consumer-nlos" target="_blank">Code</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="70">
+          <div class="glass refcard">
+            <div class="thumb"><img src="assets/img/projects/denali.gif" alt=""></div>
+            <div class="b">
+              <div class="v">CVPR 2026 &middot; Highlight</div>
+              <h4><a href="https://nikhilbehari.com/denali/" target="_blank">DENALI: A Dataset for Non-Line-of-Sight Spatial Reasoning with Low-Cost LiDARs</a></h4>
+              <div class="au">Behari, Rivero, Apostolides, Ghosh, Liang, Raskar</div>
+              <div class="lk"><a href="https://nikhilbehari.com/denali/" target="_blank">Project</a><i>/</i><a href="https://arxiv.org/abs/2604.16201" target="_blank">Paper</a><i>/</i><a href="https://github.com/NikhilBehari/denali" target="_blank">Code</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="140">
+          <div class="glass refcard">
+            <div class="thumb"><img src="assets/img/projects/bls3d.gif" alt=""></div>
+            <div class="b">
+              <div class="v">CVPR 2025 &middot; Highlight</div>
+              <h4><a href="https://nikhilbehari.com/bls3d/" target="_blank">Blurred LiDAR for Sharper 3D: Handheld 3D Scanning with Diffuse LiDAR and RGB</a></h4>
+              <div class="au">Behari, Young, Somasundaram, Klinghoffer, Dave, Raskar</div>
+              <div class="lk"><a href="https://nikhilbehari.com/bls3d/" target="_blank">Project</a><i>/</i><a href="https://arxiv.org/abs/2411.19474" target="_blank">Paper</a><i>/</i><a href="https://github.com/NikhilBehari/bls3d" target="_blank">Code</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+          <div class="glass refcard">
+            <div class="thumb"><img src="assets/img/projects/difflidar_calib.gif" alt=""></div>
+            <div class="b">
+              <div class="v">arXiv 2026</div>
+              <h4><a href="https://nikhilbehari.com/diffuselidar_calibrate/" target="_blank">Spatial Calibration of Diffuse LiDARs</a></h4>
+              <div class="au">Behari, Raskar</div>
+              <div class="lk"><a href="https://nikhilbehari.com/diffuselidar_calibrate/" target="_blank">Project</a><i>/</i><a href="https://arxiv.org/abs/2603.06531" target="_blank">Paper</a><i>/</i><a href="https://github.com/NikhilBehari/diffuselidar_calibrate" target="_blank">Code</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="70">
+          <div class="glass refcard">
+            <div class="thumb"><img src="assets/img/projects/enhancing.gif" alt=""></div>
+            <div class="b">
+              <div class="v">ICRA 2025</div>
+              <h4><a href="https://camera-culture.github.io/nlos-aided-autonomous-navigation/" target="_blank">Enhancing Autonomous Navigation by Imaging Hidden Objects with Single-Photon LiDAR</a></h4>
+              <div class="au">Young, Batagoda, Zhang, Dave, Pediredla, Negrut, Raskar</div>
+              <div class="lk"><a href="https://camera-culture.github.io/nlos-aided-autonomous-navigation/" target="_blank">Project</a><i>/</i><a href="https://arxiv.org/abs/2410.03555" target="_blank">Paper</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="140">
+          <div class="glass refcard moretile">
+            <div class="b">
+              <div class="v">More in the field</div>
+              <ul class="mlist">
+                <li><a href="https://lidarmirror.github.io" target="_blank">Handheld Mapping of Specular Surfaces with Flash LiDAR</a><span>Lin et al., MIT, ICCP 2024</span></li>
+                <li><a href="https://gleicher.sites.cs.wisc.edu/towards_3d_vision/" target="_blank">Towards 3D Vision with Low-Cost Single-Photon Cameras</a><span>Mu, Sifferman et al., UW&ndash;Madison, CVPR 2024</span></li>
+                <li><a href="https://gleicher.sites.cs.wisc.edu/unlocking_proximity_sensors/" target="_blank">Proximity Sensing with Transient Histograms</a><span>Sifferman et al., UW&ndash;Madison, RA-L 2023</span></li>
+                <li><a href="https://light.princeton.edu/publication/cheapspad/" target="_blank">Low-Cost SPAD Sensing for NLoS Imaging</a><span>Callenberg et al., Princeton, Optics Express 2021</span></li>
+                <li><a href="https://www.nature.com/articles/nature25489" target="_blank">Confocal Non-Line-of-Sight Imaging</a><span>O'Toole et al., Stanford, Nature 2018</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Schedule ======= -->
+  <section id="schedule" class="sec">
+    <div class="container">
+      <h2 data-aos="fade-up">Schedule</h2>
+      <div class="htl" data-aos="fade-up">
+        <div class="i on">
+          <div class="d">June 3, 2026</div>
+          <h5>Announced at CCD, CVPR 2026</h5>
+          <p>Track 1 opens and the toolkit is released.</p>
+        </div>
+        <div class="i">
+          <div class="d">Fall 2026</div>
+          <h5>Formal tracks open</h5>
+          <p>Test data, evaluation server, and leaderboard.</p>
+        </div>
+        <div class="i">
+          <div class="d">CVPR 2027</div>
+          <h5>Results presented</h5>
+          <p>Winners recognized at a workshop and tutorial.</p>
+        </div>
+        <div class="i more">
+          <div class="d">Evolving</div>
+          <h5>More to come</h5>
+          <p>New tasks and datasets added through the year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Participate ======= -->
+  <section id="participate" class="sec">
+    <div class="container">
+      <h2 data-aos="fade-up">Participate</h2>
+      <p class="intro" data-aos="fade-up">Track 1 is open now, on a rolling basis. Submit your project through the form, or sign up to hear when the formal tracks launch this fall.</p>
+      <div data-aos="fade-up" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+        <a class="pill live" href="https://docs.google.com/forms/d/e/1FAIpQLSdJJbDUDjDAKZCRruDeZQBBdn6PgiKELNMYFIc1stYbGLXWng/viewform" target="_blank"><i class="bi bi-arrow-up-right"></i> Submit to Track 1</a>
+        <a class="btn-textl" href="https://docs.google.com/forms/d/e/1FAIpQLSea8opzj3hRyey1VddIIyUooo1hRWdam1AEPw9GXLi1CV4bPA/viewform" target="_blank">Sign up for updates <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Organizers ======= -->
+  <section id="organizers" class="sec">
+    <div class="container">
+      <h2 data-aos="fade-up">Organizers</h2>
+      <div class="ppl-h" data-aos="fade-up">Faculty</div>
+      <div class="people" data-aos="fade-up" style="margin-bottom:34px">
+        <a class="glass person" href="https://www.media.mit.edu/people/raskar/overview/" target="_blank"><div class="nm">Ramesh Raskar</div><div class="af">MIT, Camera Culture</div></a>
+        <a class="glass person" href="https://akshatdave.github.io/" target="_blank"><div class="nm">Akshat Dave</div><div class="af">Stony Brook University</div></a>
+        <a class="glass person" href="https://pliang279.github.io/" target="_blank"><div class="nm">Paul Pu Liang</div><div class="af">MIT</div></a>
+      </div>
+      <div class="ppl-h" data-aos="fade-up">Students</div>
+      <div class="people" data-aos="fade-up">
+        <a class="glass person" href="https://nikhilbehari.com" target="_blank"><div class="nm">Nikhil Behari</div><div class="af">MIT Media Lab</div></a>
+        <a class="glass person" href="https://sidsoma.github.io" target="_blank"><div class="nm">Siddharth Somasundaram</div><div class="af">MIT Media Lab</div></a>
+        <span class="glass person"><div class="nm">Luke Apostolides</div><div class="af">MIT</div></span>
+      </div>
+    </div>
+  </section>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
-
-
     <div class="container">
-
       <div class="copyright">
-        <h4 class="copyright">Extreme Sensing with Single Photons, 2025</h4>
+        <h4 class="copyright">All-Photon Perception with Low-Cost LiDARs, CVPR 2026 CCD Workshop</h4>
       </div>
-
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/day-multipurpose-html-template-for-free/ -->
-        <!--  &copy; Copyright <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+      <div class="credits" style="margin-top:8px; font-size:13px;">
+        MIT Media Lab Camera Culture &nbsp;&middot;&nbsp;
+        <a href="index.html">Lab home</a> &nbsp;&middot;&nbsp;
+        <a href="https://alumni.media.mit.edu/~ayush/CCD/" target="_blank">CCD Workshop</a>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
 </body>
