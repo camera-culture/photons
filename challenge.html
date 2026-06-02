@@ -166,6 +166,8 @@
     .track .st { font-size: 10.5px; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
     .track .st.open { color: #fff; background: linear-gradient(150deg, rgba(172,200,255,.54), rgba(122,162,247,.28)); border: 1px solid rgba(206,224,255,.64); box-shadow: inset 0 1px 0 rgba(255,255,255,.66), 0 5px 18px -5px rgba(122,162,247,.65); font-size: 10px; letter-spacing: .1em; padding: 4px 11px 4px 9px; border-radius: 30px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
     .track .st.open .d { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #ffffff; margin-right: 6px; vertical-align: middle; animation: blink 1.7s infinite; }
+    .track .st.soon { color: #eaf1ff; background: linear-gradient(150deg, rgba(188,205,232,.3), rgba(188,205,232,.12)); border: 1px solid rgba(188,205,232,.5); box-shadow: inset 0 1px 0 rgba(255,255,255,.5); font-size: 10px; letter-spacing: .1em; padding: 4px 11px 4px 9px; border-radius: 30px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+    .track .st.soon .d { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-right: 6px; vertical-align: middle; }
     .track h4 { font-size: var(--t-title); font-weight: 600; margin: 0 0 9px; line-height: 1.35; letter-spacing: -.01em; }
     .track p { color: var(--text); font-size: var(--t-body); line-height: 1.6; margin: 0; }
     .track .r { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--hair); display: flex; flex-wrap: wrap; gap: 7px; }
@@ -301,7 +303,7 @@
       </h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="#tracks">Tracks</a></li>
+          <li><a class="nav-link scrollto" href="#tracks">Challenge</a></li>
           <li><a class="nav-link scrollto" href="#start">Get Started</a></li>
           <li><a class="nav-link scrollto" href="#references">Toolkit</a></li>
           <li><a class="nav-link scrollto" href="#participate">Participate</a></li>
@@ -319,11 +321,10 @@
         <div class="col-12" data-aos="fade-up">
           <div class="eyebrow">CVPR 2026 &middot; Computational Cameras and Displays</div>
           <h1>All&#8209;Photon Perception with Low&#8209;Cost LiDARs</h1>
-          <div class="state"><span class="dot"></span><b>Track 1, Applications of Consumer LiDAR, is open for submissions.</b> &nbsp;Tracks 2&ndash;4 release Fall 2026.</div>
+          <div class="state"><span class="dot"></span><b>Community contribution is coming soon.</b> &nbsp;Sign up for updates; benchmark tracks release Fall 2026.</div>
           <div class="links">
-            <a class="pill live" href="https://docs.google.com/forms/d/e/1FAIpQLSdJJbDUDjDAKZCRruDeZQBBdn6PgiKELNMYFIc1stYbGLXWng/viewform" target="_blank"><i class="bi bi-arrow-up-right"></i> Submit to Track 1</a>
+            <a class="pill live" href="https://docs.google.com/forms/d/e/1FAIpQLSea8opzj3hRyey1VddIIyUooo1hRWdam1AEPw9GXLi1CV4bPA/viewform" target="_blank"><i class="bi bi-bell"></i> Sign up for updates</a>
             <a class="pill alt" href="#start">Get started</a>
-            <a class="hero-note" href="https://docs.google.com/forms/d/e/1FAIpQLSea8opzj3hRyey1VddIIyUooo1hRWdam1AEPw9GXLi1CV4bPA/viewform" target="_blank"><i class="bi bi-bell"></i> Sign up for updates</a>
           </div>
         </div>
       </div>
@@ -347,38 +348,30 @@
   <!-- ======= Tracks ======= -->
   <section id="tracks" class="sec">
     <div class="container">
-      <h2 data-aos="fade-up">Tracks</h2>
+      <h2 data-aos="fade-up">The challenge</h2>
       <div class="row g-4">
-        <div class="col-lg-3 col-md-6" data-aos="fade-up">
+        <div class="col-12" data-aos="fade-up">
           <div class="track glass open">
-            <div class="top"><span class="no">01</span><span class="st open"><span class="d"></span>OPEN NOW</span></div>
-            <h4>Applications of Consumer LiDAR</h4>
-            <p>Open to everyone: submit an application, demo, or new model built on consumer LiDAR and the toolkit below.</p>
-            <div class="r"><a class="chip live" href="https://docs.google.com/forms/d/e/1FAIpQLSdJJbDUDjDAKZCRruDeZQBBdn6PgiKELNMYFIc1stYbGLXWng/viewform" target="_blank">Submit your work <i class="bi bi-arrow-right"></i></a></div>
+            <div class="top"><span class="no">COMMUNITY CONTRIBUTION</span><span class="st soon"><span class="d"></span>COMING SOON</span></div>
+            <h4>Contribute your own captures</h4>
+            <p>Bring a few-dollar single-photon LiDAR, capture your own scenes, and submit them; community captures are added to the datasets the benchmark tracks are evaluated on, in line of sight and around corners. Every result so far comes from one rig in one lab; this is how we change that. Contributors are credited, the strongest submissions win the Community Contribution track, and standout captures co-author the dataset release. The contribution toolkit is coming soon. Sign up for updates.</p>
+            <div class="r"><a class="chip live" href="https://docs.google.com/forms/d/e/1FAIpQLSea8opzj3hRyey1VddIIyUooo1hRWdam1AEPw9GXLi1CV4bPA/viewform" target="_blank">Sign up for updates <i class="bi bi-arrow-right"></i></a><a class="chip" href="#start">How to capture <i class="bi bi-arrow-right"></i></a></div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="80">
+        <div class="col-lg-6" data-aos="fade-up">
           <div class="track glass">
-            <div class="top"><span class="no">02</span><span class="st">Fall 2026</span></div>
-            <h4>Non-Line-of-Sight Perception</h4>
-            <p>Perceive objects hidden around a corner from multi-bounce histograms: position, size, identity, and more.</p>
-            <div class="r"><a class="chip" href="https://nikhilbehari.com/denali/" target="_blank">DENALI</a><a class="chip" href="https://cornar.media.mit.edu" target="_blank">Consumer NLoS</a></div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="160">
-          <div class="track glass">
-            <div class="top"><span class="no">03</span><span class="st">Fall 2026</span></div>
+            <div class="top"><span class="no">TRACK A</span><span class="st">Fall 2026</span></div>
             <h4>Single-View 3D from Coarse Transients</h4>
-            <p>Dense 3D from a single 3&times;3 or 8&times;8 view, where each coarse pixel integrates a wide field.</p>
+            <p>Dense, metric 3D from a single coarse 3&times;3 or 8&times;8 view, where each pixel integrates a wide field, in line of sight.</p>
             <div class="r"><a class="chip" href="https://nikhilbehari.com/bls3d/" target="_blank">Blurred LiDAR</a><a class="chip" href="https://nikhilbehari.com/diffuselidar_calibrate/" target="_blank">Calibration</a></div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="240">
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
           <div class="track glass">
-            <div class="top"><span class="no">04</span><span class="st">Fall 2026</span></div>
-            <h4>Simulating Low-Cost NLoS LiDAR</h4>
-            <p>Synthetic transients that match real captures: pulse shape, timing jitter, and sensor noise.</p>
-            <div class="r"><a class="chip" href="https://nikhilbehari.com/denali/" target="_blank">DENALI Twin</a><a class="chip" href="https://github.com/diegoroyo/mitransient" target="_blank">MiTransient</a></div>
+            <div class="top"><span class="no">TRACK B</span><span class="st">Fall 2026</span></div>
+            <h4>Non-Line-of-Sight Perception</h4>
+            <p>Perceive objects hidden around a corner from the multi-bounce histogram tail: position, size, identity, and tracking.</p>
+            <div class="r"><a class="chip" href="https://nikhilbehari.com/denali/" target="_blank">DENALI</a><a class="chip" href="https://cornar.media.mit.edu" target="_blank">Consumer NLoS</a></div>
           </div>
         </div>
       </div>
@@ -399,7 +392,7 @@
             <div class="qs-b">
               <h4>Capture your own scenes</h4>
               <ol class="qsteps">
-                <li><div class="t">Buy a kit</div><div class="cc"><a class="chip" href="https://ams-osram.com/products/boards-kits-accessories/kits/ams-tmf8828-evm-eb-shield-evaluation-kit" target="_blank">TMF8828</a><a class="chip" href="https://www.st.com/en/evaluation-tools/p-nucleo-53l8a1.html" target="_blank">VL53L8CX</a></div></li>
+                <li><div class="t">Buy a kit, $15 to $50</div><div class="cc"><a class="chip" href="https://ams-osram.com/products/boards-kits-accessories/kits/ams-tmf8828-evm-eb-shield-evaluation-kit" target="_blank">TMF8828</a><a class="chip" href="https://www.st.com/en/evaluation-tools/p-nucleo-53l8a1.html" target="_blank">VL53L8CX</a></div></li>
                 <li><div class="t">Install cc-hardware</div><div class="code"><span class="p">git</span> clone https://github.com/camera-culture/cc-hardware<br><span class="p">pip</span> install -e ./cc-hardware<br><span class="p">python</span> -m cc_hardware.tools.flash</div></li>
                 <li><div class="t">Capture histograms</div><div class="code"><span class="p">python</span> examples/sensors/spad_dashboard_cli.py sensor=TMF8828Config</div></li>
               </ol>
@@ -429,7 +422,7 @@
   <section id="references" class="sec">
     <div class="container">
       <h2 data-aos="fade-up">Toolkit</h2>
-      <p class="intro" data-aos="fade-up">Open datasets, methods, and code you can build a Track 1 application on.</p>
+      <p class="intro" data-aos="fade-up">Open datasets, methods, and code to build on, for your own captures and for both tracks.</p>
 
       <div class="row g-4">
         <div class="col-lg-4 col-md-6" data-aos="fade-up">
@@ -513,7 +506,7 @@
         <div class="i on">
           <div class="d">June 3, 2026</div>
           <h5>Announced at CCD, CVPR 2026</h5>
-          <p>Track 1 opens and the toolkit is released.</p>
+          <p>The toolkit is released; community contribution opens soon.</p>
         </div>
         <div class="i">
           <div class="d">Fall 2026</div>
@@ -538,10 +531,10 @@
   <section id="participate" class="sec">
     <div class="container">
       <h2 data-aos="fade-up">Participate</h2>
-      <p class="intro" data-aos="fade-up">Track 1 is open now, on a rolling basis. Submit your project through the form, or sign up to hear when the formal tracks launch this fall.</p>
+      <p class="intro" data-aos="fade-up">Community contribution is coming soon. Sign up for updates on it, and on when the benchmark tracks launch this fall.</p>
       <div data-aos="fade-up" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
-        <a class="pill live" href="https://docs.google.com/forms/d/e/1FAIpQLSdJJbDUDjDAKZCRruDeZQBBdn6PgiKELNMYFIc1stYbGLXWng/viewform" target="_blank"><i class="bi bi-arrow-up-right"></i> Submit to Track 1</a>
-        <a class="btn-textl" href="https://docs.google.com/forms/d/e/1FAIpQLSea8opzj3hRyey1VddIIyUooo1hRWdam1AEPw9GXLi1CV4bPA/viewform" target="_blank">Sign up for updates <i class="bi bi-arrow-right"></i></a>
+        <a class="pill live" href="https://docs.google.com/forms/d/e/1FAIpQLSea8opzj3hRyey1VddIIyUooo1hRWdam1AEPw9GXLi1CV4bPA/viewform" target="_blank"><i class="bi bi-bell"></i> Sign up for updates</a>
+        <a class="btn-textl" href="#start">See how to capture <i class="bi bi-arrow-right"></i></a>
       </div>
     </div>
   </section>
